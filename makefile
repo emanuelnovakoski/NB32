@@ -1,19 +1,25 @@
-O_SOURCE=$(wildcard ./src/*.o)
+O_SOURCE=$(wildcard ./src/processor/*.o)
+O_INTERFACE_SOURCE=$(wildcard ./src/interface/*.o)
+SRC_DIR=src/processor
+INTERFACE_DIR=src/interface
 
-NB32: memory alu register registerBank
-	g++ $(O_SOURCE) src/nb32.cpp -o nb32 -lncurses
+NB32: memory alu register registerBank memoryInterface
+	g++ $(SRC_DIR)/nb32.cpp $(O_SOURCE) $(O_INTERFACE_SOURCE) -o nb32 -lncurses
 	
 register:
-	g++ -c src/register.cpp -o src/register.o
+	g++ -c $(SRC_DIR)/register.cpp -o $(SRC_DIR)/register.o
 
 registerBank: register stateRegister
-	g++ -c src/registerBank.cpp -o src/registerBank.o
+	g++ -c $(SRC_DIR)/registerBank.cpp -o $(SRC_DIR)/registerBank.o
 	
 stateRegister: 
-	g++ -c src/stateRegister.cpp -o src/stateRegister.o
+	g++ -c $(SRC_DIR)/stateRegister.cpp -o $(SRC_DIR)/stateRegister.o
 	
 memory: 
-	g++ -c src/memory.cpp -o src/memory.o
+	g++ -c $(SRC_DIR)/memory.cpp -o $(SRC_DIR)/memory.o
 
 alu: 
-	g++ -c src/alu.cpp -o src/alu.o
+	g++ -c $(SRC_DIR)/alu.cpp -o $(SRC_DIR)/alu.o
+
+memoryInterface: memory
+	g++ -c $(INTERFACE_DIR)/memoryInterface.cpp -o $(SRC_DIR)/memoryInterface.o

@@ -9,19 +9,20 @@
 #include <cstring>
 #include <bitset>
 #include <bits/stdc++.h>
+#include <vector>
 
 namespace NB32
 {
 	class Memory
 	{
 		private:
-			char memoryBlock[MEM_SIZE][9];
+			std::vector<std::string> memoryBlock;
 		
 		public:
 			Memory();
-			int read(char* buffer[], int index, int length);
-			int store(int index, int length, char value[][9]);
-			void dumpMemoryToFile(char* filename);
-			void loadMemoryFromFile(char* filename);
+			std::vector<std::string> read(int index, int length);
+			int store(int index, int length, std::vector<std::string> buffer);
+			/*void dumpMemoryToFile(char* filename);
+			void loadMemoryFromFile(char* filename);*/
 	};
 }

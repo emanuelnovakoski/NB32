@@ -3,9 +3,9 @@
 #include <iostream>
 #include <cstring>
 #include <bitset>
-#include "memory.hpp"
 #include "alu.hpp"
 #include <ncurses.h>
+#include "../interface/memoryInterface.hpp"
 
 
 namespace NB32
@@ -13,7 +13,6 @@ namespace NB32
 	class Nb32
 	{
 		private:
-			Memory* ram;
 			RegisterBank* regBank;
 	};
 }

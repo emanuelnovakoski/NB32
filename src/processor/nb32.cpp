@@ -12,11 +12,32 @@ int main()
 {	
 	Memory* ram = new Memory();
 	RegisterBank* regBank = new RegisterBank();
+	MemoryInterface* memory1;
 	
-	initscr();			
+	initscr();
+	raw();
+	noecho();
+	keypad(stdscr, TRUE);
 	printw("Hello World !!!");	
 	refresh();			
-	getch();			
+	
+	try
+	{
+		memory1 = new MemoryInterface();
+	}
+	catch (...)
+	{
+		free(memory1);	
+	}
+	
+	
+	
+	
+	getch();
+	if (memory1 != NULL)
+		memory1->destroyScreen();
+		
+
 	endwin();
 	
 	// ALU test neg
@@ -223,15 +244,20 @@ int main()
 
 
 	// Memory test
+	
 	/*
 	char test[2][9] = {"00010001", "00110011"};
 	
-	ram->loadMemoryFromFile("mem.txt");
-	char* read[MEM_SIZE];
-	ram->store(11, 2, test);
-	ram->read(read, 0, MEM_SIZE);
+	//ram->loadMemoryFromFile("mem.txt");
+	cout << "HERE" << endl;
 	
-	formatStringToMemoryVisual(read, MEM_SIZE, 0);
+	
+	char* read[20];
+	
+	ram->store(11, 2, test);
+	ram->read(read, 0, 20);
+	
+	formatStringToMemoryVisual(read, 20, 0);
 	
 	
 	cout << "\n";

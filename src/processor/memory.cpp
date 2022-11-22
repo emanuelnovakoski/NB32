@@ -8,35 +8,30 @@ namespace NB32
 	{
 		for (int i=0; i<MEM_SIZE; i++)
 		{
-			strcpy(this->memoryBlock[i], "00000000");
+			memoryBlock.push_back("00000000");
 		}
 	}
 
-	int Memory::read(char* buffer[], int index, int length)
+	vector<string> Memory::read(int index, int length)
 	{
-		if (index + length > MEM_SIZE)
+		vector<string> rVec;
+		if ((index + length > MEM_SIZE) || (index + length < 0))
 		{
+			cout << "Out of bounds\n";
 			// Out of bounds error
-			return -1;
+			return rVec;
 		}
-		char* fromMemory = (char*) malloc(sizeof(char)*length*9);
+
 		for (int i=0; i<length; i++)
 		{
-			//cout << "Here is i " << i << endl;
-			buffer[i] = (char*) malloc(sizeof(char)*9);
-			//cout << strlen(buffer[i]) << endl;
-			//cout << strlen(this->memoryBlock[index+i]) << endl;
-			strcpy(buffer[i], this->memoryBlock[index+i]);
-			//strcat(fromMemory, this->memoryBlock[index+i]);
+			rVec.push_back(this->memoryBlock[index+i]);
 		}
-		return 0;
-
+		return rVec;
 	}
 	
-	int Memory::store(int index, int length, char value[][9])
+	int Memory::store(int index, int length, vector<string> buffer)
 	{
-		
-		if (index + length > MEM_SIZE)
+		if ((index + length > MEM_SIZE) || (index < 0))
 		{
 			// Out of bounds error
 			return -1;
@@ -44,13 +39,13 @@ namespace NB32
 		
 		for (int i=0; i<length; i++)
 		{
-			strcpy(this->memoryBlock[index+i], value[i]);
+			this->memoryBlock[index+i] = buffer[i];
 		} 
 		
 		return 0;
 	}
 	
-	void Memory::dumpMemoryToFile(char* filename)
+/*	void Memory::dumpMemoryToFile(char* filename)
 	{
 		FILE* dump = fopen(filename, "w");
 		
@@ -78,5 +73,5 @@ namespace NB32
 			strcpy(this->memoryBlock[i], example);
 		}
 		
-	}
+	}*/
 }
