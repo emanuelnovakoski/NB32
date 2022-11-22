@@ -1,4 +1,5 @@
 #include <ncurses.h>
+#include <iomanip>
 #include "../processor/memory.hpp"
 
 namespace NB32

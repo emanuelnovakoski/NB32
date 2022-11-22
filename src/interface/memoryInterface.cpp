@@ -4,7 +4,8 @@
 
 using namespace std;
 namespace NB32
-{
+{	
+	void formatString(string str);
 	int MemoryInterface::interfaceCounter = 1;
 	
 	MemoryInterface::MemoryInterface()
@@ -19,16 +20,12 @@ namespace NB32
 		
 		this->ram = new Memory();
 		
-		
-		this->refreshScreen();
-	
-		
-		MemoryInterface::interfaceCounter++;
-		
 		this->memoryPointer = 0;
 		
+
+		MemoryInterface::interfaceCounter++;
 		
-		
+		this->refreshScreen();
 	}
 	
 	void MemoryInterface::updatePointer(int pos)
@@ -47,15 +44,47 @@ namespace NB32
 	void MemoryInterface::refreshScreen()
 	{
 		vector<string> memSegment;
-		/*
+	
 		int middleElement = this->memoryPointer;
+		int topElement;
+		
+		this->ram->loadMemoryFromFile("in.txt");
+		
 		
 		if (middleElement < (LINES-2)/2)
 			middleElement = (LINES-2)/2;
 		else
-			if (MEM_SIZE - middleElement < (LINES-2)/2)
-				middleElement = MEM_SIZE - (LINES-2)/2;
-		*/
+			if (middleElement + (LINES-2)/2 > MEM_SIZE)
+				middleElement = MEM_SIZE - (LINES-2)/2 - 1;
+	
+		
+		topElement = middleElement - (LINES-2)/2;
+		
+		memSegment = this->ram->read(topElement, LINES-2);
+		
+		
+		for (int i=0; i<memSegment.size(); i++)
+		{
+			to_string(topElement+i);
+			
+			std::stringstream ss;
+			ss << std::hex << std::setfill('0') << std::setw(8) << topElement+i;
+			string index = ss.str();
+			
+			
+			string dword;
+			dword += memSegment[i];
+			dword += memSegment[i];
+			dword += memSegment[i];
+			dword += memSegment[i];
+	
+			
+			mvwprintw(this->window, i+1, 1, (index + ": " + memSegment[i]).c_str());
+			
+			
+		}
+		
+		
 	
 		wrefresh(this->window);
 
@@ -65,4 +94,6 @@ namespace NB32
 	{
 		delwin(this->window);
 	}
+	
+	
 }
