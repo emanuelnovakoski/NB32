@@ -5,6 +5,7 @@ INTERFACE_DIR=src/interface
 
 NB32: memory alu register registerBank memoryInterface
 	g++ $(SRC_DIR)/nb32.cpp $(O_SOURCE) $(O_INTERFACE_SOURCE) -o nb32 -lncurses
+	rm $(O_SOURCE) $(O_INTERFACE_SOURCE)
 	
 register:
 	g++ -c $(SRC_DIR)/register.cpp -o $(SRC_DIR)/register.o
