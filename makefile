@@ -23,3 +23,6 @@ alu:
 
 memoryInterface: memory
 	g++ -c $(INTERFACE_DIR)/memoryInterface.cpp -o $(SRC_DIR)/memoryInterface.o
+	
+clean:
+	rm $(O_SOURCE) $(O_INTERFACE_SOURCE) nb32

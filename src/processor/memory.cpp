@@ -17,7 +17,7 @@ namespace NB32
 		vector<string> rVec;
 		if ((index + length > MEM_SIZE) || (index + length < 0))
 		{
-			cout << "Out of bounds\n";
+			cout << "Out of bounds index: " << index << ", length:" << length << endl;
 			// Out of bounds error
 			return rVec;
 		}
@@ -29,8 +29,9 @@ namespace NB32
 		return rVec;
 	}
 	
-	int Memory::store(int index, int length, vector<string> buffer)
+	int Memory::store(int index, vector<string> buffer)
 	{
+		int length = buffer.size();
 		if ((index + length > MEM_SIZE) || (index < 0))
 		{
 			// Out of bounds error
@@ -45,19 +46,42 @@ namespace NB32
 		return 0;
 	}
 	
-/*	void Memory::dumpMemoryToFile(char* filename)
+	void Memory::dumpMemoryToFile(char* filename)
 	{
-		FILE* dump = fopen(filename, "w");
+		std::ofstream out(filename);
 		
-		for (int i=0; i<MEM_SIZE; i++)
-		{
-			fputs(this->memoryBlock[i], dump);
-			fputs("\n", dump);
-		}
+		for (const auto &e : this->memoryBlock)
+			out << e << "\n";
+		
 	}
-	
+
 	void Memory::loadMemoryFromFile(char* filename)
 	{
+		vector<string> newMem;
+		string line;
+		ifstream file(filename);
+		
+		int i=0;
+		while (std::getline(file, line))
+		{
+			i++;
+			if (regex_match (line, regex(MEMORY_REGEX)))
+				newMem.push_back(line);
+			else 
+			{
+				cout << "Error parsing line: " << i << endl;
+				return;
+			}
+		}
+		for (; i<MEM_SIZE; i++)
+		{
+			newMem.push_back("00000000");
+		}
+		this->memoryBlock = newMem;
+	
+		
+	
+	/*
 		FILE* file = fopen(filename, "r");
 		
 		for (int i=0; i<10; i++)
@@ -71,7 +95,7 @@ namespace NB32
 //			cout << endl;
 //			cout << example << endl;;
 			strcpy(this->memoryBlock[i], example);
-		}
+		}*/
 		
-	}*/
+	}
 }

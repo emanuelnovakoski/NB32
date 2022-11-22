@@ -2,7 +2,8 @@
 #define MEM_LENGTH_BYTE 1
 #define MEM_LENGTH_WORD 2
 #define MEM_LENGTH_DWORD 4
-
+#define MEMORY_REGEX "^[01]{8}$"
+#include <regex>
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -21,8 +22,8 @@ namespace NB32
 		public:
 			Memory();
 			std::vector<std::string> read(int index, int length);
-			int store(int index, int length, std::vector<std::string> buffer);
-			/*void dumpMemoryToFile(char* filename);
-			void loadMemoryFromFile(char* filename);*/
+			int store(int index, std::vector<std::string> buffer);
+			void dumpMemoryToFile(char* filename);
+			void loadMemoryFromFile(char* filename);
 	};
 }

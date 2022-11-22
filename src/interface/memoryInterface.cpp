@@ -56,17 +56,9 @@ namespace NB32
 			if (MEM_SIZE - middleElement < (LINES-2)/2)
 				middleElement = MEM_SIZE - (LINES-2)/2;
 		*/
-		
-		vector<string> myvec = {"111111111"};
-		
-		this->ram->store(5, 1, myvec);
-		
-		memSegment = this->ram->read(4, 5);
-		
-		for (int i=0; i<memSegment.size(); i++)
-			cout << memSegment[i] << endl;
 	
 		wrefresh(this->window);
+
 	}
 	
 	void MemoryInterface::destroyScreen()
