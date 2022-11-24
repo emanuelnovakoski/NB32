@@ -1,7 +1,7 @@
 #ifndef SPECIALINST
 #define SPECIALINST
 
-#include "instruction.hpp"
+#include "../instruction.hpp"
 namespace NB32
 {
 	class SpecialInst : public Instruction

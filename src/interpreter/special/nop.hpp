@@ -1,11 +1,16 @@
+#ifndef NOP
+#define NOP
+
 #include "specialInst.hpp"
 
 namespace NB32
 {
-	class Hlt : public SpecialInst
+	class Nop : public SpecialInst
 	{
 		public:
-			Hlt();
+			Nop();
 			int execute();
 	};
 }
+
+#endif

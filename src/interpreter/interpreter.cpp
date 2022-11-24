@@ -1,6 +1,5 @@
 #include <iostream>
 #include "interpreter.hpp"
-#include "hlt.hpp"
 using namespace std;
 namespace NB32
 {	

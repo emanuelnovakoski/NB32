@@ -5,7 +5,6 @@
 #include <bitset>
 #include "alu.hpp"
 #include <ncurses.h>
-#include "../interpreter/specialInst.hpp"
 #include "../interface/memoryInterface.hpp"
 
 
