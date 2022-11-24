@@ -6,7 +6,7 @@ namespace NB32
 	void formatString(string str);
 	int MemoryInterface::interfaceCounter = 1;
 	
-	MemoryInterface::MemoryInterface()
+	MemoryInterface::MemoryInterface(Memory* memory)
 	{
 		if (MemoryInterface::interfaceCounter > MAX_WINDOWS)
 			throw "Max memory windows exceeded";
@@ -18,7 +18,7 @@ namespace NB32
 		
 		
 		
-		this->ram = new Memory();
+		this->ram = memory;
 		
 		this->memoryPointer = 0;
 		
@@ -50,7 +50,6 @@ namespace NB32
 		int middleElement = this->memoryPointer;
 		int topElement;
 		
-		this->ram->loadMemoryFromFile("in.txt");
 		
 		
 		if (middleElement < (LINES-2)/2)
@@ -71,7 +70,7 @@ namespace NB32
 			
 			// build address
 			std::stringstream ss;
-			ss << std::hex << std::setfill('0') << std::setw(8) << topElement+i;
+			ss << std::hex << std::setfill('0') << std::setw(6) << topElement+i;
 			string index = ss.str();
 			
 			
@@ -93,7 +92,7 @@ namespace NB32
 			wattron(this->window, A_BOLD);
 			wattron(this->window, A_STANDOUT);
 			wattron(this->window, A_UNDERLINE);
-			mvwprintw(this->window, i+1, 1, "%s", (index + ":").c_str());
+			mvwprintw(this->window, i+1, 1, "0x%s", (index + ":").c_str());
 			wattroff(this->window, A_BOLD);
 			wattroff(this->window, A_STANDOUT);
 			wattroff(this->window, A_UNDERLINE);
@@ -106,7 +105,7 @@ namespace NB32
 			// print instruction representation
 			Instruction* instruction = Nb32Interpreter::interpret(iChar);
 			if (instruction == nullptr)
-				wprintw(this->window, "    NOT INSTRUCTION ");
+				wprintw(this->window, "    NOT AN INSTRUCTION ");
 			else
 				wprintw(this->window, "    %s ", instruction->instructionAsString().c_str());
 			

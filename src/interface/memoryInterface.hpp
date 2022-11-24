@@ -21,7 +21,7 @@ namespace NB32
 			static int interfaceCounter;
 			
 		public:
-			MemoryInterface();
+			MemoryInterface(Memory* memory);
 			void updatePointer(int pos);
 			void refreshScreen();
 			void destroyScreen();

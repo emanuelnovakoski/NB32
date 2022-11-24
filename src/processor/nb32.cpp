@@ -8,12 +8,19 @@ using namespace NB32;
 
 void formatStringToMemoryVisual(char* str[], int length, int startIndex);
 
-int main()
+int main(int argc, char** argv)
 {	
+	
+
 	Memory* ram = new Memory();
 	RegisterBank* regBank = new RegisterBank();
-	MemoryInterface* memory1;
+	Memory* memory = new Memory();
+	MemoryInterface* memInterface;
 
+	if (argc == 2)
+	{
+		memory->loadMemoryFromFile(argv[1]);
+	}
 	
 	initscr();
 	raw();
@@ -24,19 +31,19 @@ int main()
 	
 	try
 	{
-		memory1 = new MemoryInterface();
+		memInterface = new MemoryInterface(memory);
 	}
 	catch (...)
 	{
-		free(memory1);	
+		delete memInterface;
 	}
 	
 
 	
 	getch();
 	
-	if (memory1 != NULL)
-		memory1->destroyScreen();
+	if (memInterface != NULL)
+		memInterface->destroyScreen();
 		
 
 	endwin();

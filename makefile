@@ -35,7 +35,7 @@ memoryInterface: memory interpreter
 specialInst: nop hlt
 	g++ -c $(INTERPRETER_DIR)/$(SPECIAL_DIR)/specialInst.cpp -o $(INTERPRETER_DIR)/$(SPECIAL_DIR)/specialInst.o
 
-arithInst: add
+arithInst: add sub
 	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/arithInst.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/arithInst.o
 
 instruction: 
@@ -52,6 +52,9 @@ hlt:
 
 add:
 	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/add.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/add.o
+	
+sub:
+	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/sub.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/sub.o
 
 clean:
 	rm $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE) O_INTERPRETER_SPECIAL_SOURCE=$(wildcard ./src/interpreter/special/*.o) nb32
