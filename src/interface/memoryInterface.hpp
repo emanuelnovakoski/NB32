@@ -2,12 +2,13 @@
 #include <iomanip>
 #include <algorithm>
 #include "../processor/memory.hpp"
+#include "../interpreter/interpreter.hpp"
 #define WINDOW_WIDTH 47
 #define MAX_WINDOWS 2
 #define IMM_HEX_XPOS 33
 #define IMM_DEC_XPOS 19
 
-// TODO decouple this class from the actual processor implementation
+// TODO decouple processor implementation from this class
 
 namespace NB32
 {

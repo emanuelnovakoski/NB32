@@ -1,7 +1,6 @@
 #include "memoryInterface.hpp"
-
-
 using namespace std;
+
 namespace NB32
 {	
 	void formatString(string str);
@@ -17,12 +16,16 @@ namespace NB32
 		
 		box(this->window, 0 , 0);	
 		
+		
+		
 		this->ram = new Memory();
 		
 		this->memoryPointer = 0;
 		
 
 		MemoryInterface::interfaceCounter++;
+		
+		mvwprintw(this->window, 0, 1, "MEMORY");	
 		
 		this->refreshScreen();
 	}
@@ -79,7 +82,6 @@ namespace NB32
 			d = d + memSegment[topElement+i+2] + " ";
 			d = d + memSegment[topElement+i+3];
 			
-			// TODO change this to deduce from string d
 			// build dword as number
 			string iChar(d);
 			iChar.erase (std::remove (iChar.begin(), iChar.end(), ' '), iChar.end());
@@ -90,13 +92,21 @@ namespace NB32
 			wattron(this->window, A_BOLD);
 			wattron(this->window, A_STANDOUT);
 			wattron(this->window, A_UNDERLINE);
-			mvwprintw(this->window, i+1, 1, (index + ":").c_str());
+			mvwprintw(this->window, i+1, 1, "%s", (index + ":").c_str());
 			wattroff(this->window, A_BOLD);
 			wattroff(this->window, A_STANDOUT);
 			wattroff(this->window, A_UNDERLINE);
 			
+			
 			// print binary value of dword
-			wprintw(this->window, d.c_str());
+			wprintw(this->window, "%s", d.c_str());
+			
+			// print instruction representation
+			Instruction* instruction = Nb32Interpreter::interpret(iChar);
+			if (instruction == nullptr)
+				mvwprintw(this->window, i+2, 1, "NOT INSTRUCTION ");
+			else
+				mvwprintw(this->window, i+2, 1, "%s ", instruction->instructionAsString().c_str());
 			
 			// print hexadecimal value of dword
 			mvwprintw(this->window, i+3, 3, "Immediate: ");

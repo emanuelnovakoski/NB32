@@ -13,6 +13,7 @@ int main()
 	Memory* ram = new Memory();
 	RegisterBank* regBank = new RegisterBank();
 	MemoryInterface* memory1;
+
 	
 	initscr();
 	raw();
@@ -30,10 +31,10 @@ int main()
 		free(memory1);	
 	}
 	
-	
-	
+
 	
 	getch();
+	
 	if (memory1 != NULL)
 		memory1->destroyScreen();
 		
