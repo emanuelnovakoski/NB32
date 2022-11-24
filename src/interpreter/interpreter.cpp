@@ -1,6 +1,7 @@
 #include <iostream>
 #include "interpreter.hpp"
 using namespace std;
+// TODO put return inside if
 namespace NB32
 {	
 	Instruction* interpretSpecial(std::string instructionString)
@@ -22,11 +23,23 @@ namespace NB32
 		}*/
 	}
 	
+	Instruction* interpretArith(string instructionString)
+	{
+		Instruction* instruction = nullptr;
+		if (instructionString.compare(4, 8, INST_ARITH_ADD_BITCODE) == 0)
+			instruction = new Add(instructionString);
+		return instruction;
+	}	
+	
 	Instruction* Nb32Interpreter::interpret(std::string instructionString)
 	{
 		if (instructionString.compare(0, 4, INST_GROUP_SPECIAL) == 0)
 		{
 			return interpretSpecial(instructionString);
+		}
+		if (instructionString.compare(0, 4, INST_GROUP_ARITH) == 0)
+		{
+			return interpretArith(instructionString);
 		}
 		return nullptr;
 		/*

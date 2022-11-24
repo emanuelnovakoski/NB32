@@ -1,5 +1,6 @@
 #include "special/nop.hpp"
 #include "special/hlt.hpp"
+#include "arithmetic/add.hpp"
 #include "mnemonics.hpp"
 #include <string>
 namespace NB32

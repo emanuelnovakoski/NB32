@@ -4,10 +4,8 @@
 using namespace std;
 namespace NB32
 {
-	SpecialInst::SpecialInst()
-	{
-		
-	}
+	SpecialInst::SpecialInst() {}
+	
 	std::string SpecialInst::instructionAsString()
 	{
 		return this->mnemonic;

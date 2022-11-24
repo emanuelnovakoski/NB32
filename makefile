@@ -8,10 +8,11 @@ SRC_DIR=src/processor
 INTERFACE_DIR=src/interface
 INTERPRETER_DIR=src/interpreter
 SPECIAL_DIR=special
+ARITHMETIC_DIR=arithmetic
 
 NB32: memory alu register registerBank memoryInterface 
-	g++ $(SRC_DIR)/nb32.cpp $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE)  $(O_INTERPRETER_SPECIAL_SOURCE) -o nb32 -lncurses
-	rm $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE) $(O_INTERPRETER_SPECIAL_SOURCE)
+	g++ $(SRC_DIR)/nb32.cpp $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE)  $(O_INTERPRETER_SPECIAL_SOURCE) $(O_INTERPRETER_ARITH_SOURCE) -o nb32 -lncurses
+	rm $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE) $(O_INTERPRETER_SPECIAL_SOURCE) $(O_INTERPRETER_ARITH_SOURCE)
 	
 register:
 	g++ -c $(SRC_DIR)/register.cpp -o $(SRC_DIR)/register.o
@@ -34,10 +35,13 @@ memoryInterface: memory interpreter
 specialInst: nop hlt
 	g++ -c $(INTERPRETER_DIR)/$(SPECIAL_DIR)/specialInst.cpp -o $(INTERPRETER_DIR)/$(SPECIAL_DIR)/specialInst.o
 
+arithInst: add
+	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/arithInst.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/arithInst.o
+
 instruction: 
 	g++ -c $(INTERPRETER_DIR)/instruction.cpp -o $(INTERPRETER_DIR)/instruction.o
 	
-interpreter: specialInst instruction
+interpreter: specialInst arithInst instruction
 	g++ -c $(INTERPRETER_DIR)/interpreter.cpp -o $(INTERPRETER_DIR)/interpreter.o
 	
 nop:
@@ -45,6 +49,9 @@ nop:
 
 hlt:
 	g++ -c $(INTERPRETER_DIR)/$(SPECIAL_DIR)/hlt.cpp -o $(INTERPRETER_DIR)/$(SPECIAL_DIR)/hlt.o
+
+add:
+	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/add.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/add.o
 
 clean:
 	rm $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE) O_INTERPRETER_SPECIAL_SOURCE=$(wildcard ./src/interpreter/special/*.o) nb32
