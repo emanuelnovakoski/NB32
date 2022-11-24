@@ -6,7 +6,7 @@
 #define WINDOW_WIDTH 47
 #define MAX_WINDOWS 2
 #define IMM_HEX_XPOS 33
-#define IMM_DEC_XPOS 19
+#define IMM_DEC_XPOS 18
 
 // TODO decouple processor implementation from this class
 

@@ -7,9 +7,9 @@ namespace NB32
 	{
 		this->mnemonic = INST_SPECIAL_NOP_MNEMONIC;
 	}
-	void Nop::execute()
+	int Nop::execute()
 	{	
 		// does nothing
-		return;
+		return Instruction::CODE_OK;
 	}
 }

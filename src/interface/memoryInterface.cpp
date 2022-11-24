@@ -85,7 +85,8 @@ namespace NB32
 			// build dword as number
 			string iChar(d);
 			iChar.erase (std::remove (iChar.begin(), iChar.end(), ' '), iChar.end());
-
+			
+			
 			long iDecimal = stol(iChar, nullptr, 2);
 			
 			// print address
@@ -97,16 +98,17 @@ namespace NB32
 			wattroff(this->window, A_STANDOUT);
 			wattroff(this->window, A_UNDERLINE);
 			
-			
 			// print binary value of dword
 			wprintw(this->window, "%s", d.c_str());
+			
+			mvwprintw(this->window, i+2, 1, "Instruction: ");
 			
 			// print instruction representation
 			Instruction* instruction = Nb32Interpreter::interpret(iChar);
 			if (instruction == nullptr)
-				mvwprintw(this->window, i+2, 1, "NOT INSTRUCTION ");
+				wprintw(this->window, "    NOT INSTRUCTION ");
 			else
-				mvwprintw(this->window, i+2, 1, "%s ", instruction->instructionAsString().c_str());
+				wprintw(this->window, "    %s ", instruction->instructionAsString().c_str());
 			
 			// print hexadecimal value of dword
 			mvwprintw(this->window, i+3, 3, "Immediate: ");

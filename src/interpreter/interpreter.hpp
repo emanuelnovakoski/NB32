@@ -1,4 +1,5 @@
 #include "nop.hpp"
+//#include "hlt.hpp"
 #include "mnemonics.hpp"
 #include <string>
 namespace NB32

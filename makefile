@@ -27,7 +27,7 @@ alu:
 memoryInterface: memory interpreter 
 	g++ -c $(INTERFACE_DIR)/memoryInterface.cpp -o $(SRC_DIR)/memoryInterface.o
 
-specialInst: nop
+specialInst: nop hlt
 	g++ -c $(INTERPRETER_DIR)/specialInst.cpp -o $(INTERPRETER_DIR)/specialInst.o
 
 instruction: 
@@ -35,9 +35,12 @@ instruction:
 	
 interpreter: specialInst instruction
 	g++ -c $(INTERPRETER_DIR)/interpreter.cpp -o $(INTERPRETER_DIR)/interpreter.o
+	
 nop:
 	g++ -c $(INTERPRETER_DIR)/nop.cpp -o $(INTERPRETER_DIR)/nop.o
-	
+
+hlt:
+	g++ -c $(INTERPRETER_DIR)/hlt.cpp -o $(INTERPRETER_DIR)/hlt.o
 
 clean:
 	rm $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE) nb32

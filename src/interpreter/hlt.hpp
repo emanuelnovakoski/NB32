@@ -2,10 +2,10 @@
 
 namespace NB32
 {
-	class Nop : public SpecialInst
+	class Hlt : public SpecialInst
 	{
 		public:
-			Nop();
+			Hlt();
 			int execute();
 	};
 }
