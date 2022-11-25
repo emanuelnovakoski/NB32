@@ -10,6 +10,7 @@
 
 namespace NB32
 {
+	static const std::string USAGE_STRING = std::string("Usage: nb32 [flags]\n\nFlags:\n\r\t-h --help\t\tPrints this message.\n\r\t-l --load [filename]\tLoads filename to memory on startup.\n");
 	class Nb32
 	{
 		private:

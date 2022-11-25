@@ -17,9 +17,37 @@ int main(int argc, char** argv)
 	Memory* memory = new Memory();
 	MemoryInterface* memInterface;
 
-	if (argc == 2)
+	/*if (argc == 2)
 	{
 		memory->loadMemoryFromFile(argv[1]);
+	}*/
+	
+	int i = 1;
+	while (i < argc)
+	{
+
+		if ((strcmp(argv[i], "-h") == 0) || (strcmp(argv[i], "--help") == 0))
+		{
+			cout << USAGE_STRING;
+			return 0;
+		}
+		if ((strcmp(argv[i], "-l") == 0) || (strcmp(argv[i], "--load") == 0))
+		{
+			i++;
+			if (i < argc)
+			{
+				
+				memory->loadMemoryFromFile(argv[i]);
+			}
+			else
+			{
+				cout << USAGE_STRING;
+				return -1;
+				
+			}
+			
+		}
+		i++;
 	}
 	
 	initscr();
