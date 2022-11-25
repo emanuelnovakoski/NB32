@@ -20,7 +20,7 @@ namespace NB32
 		
 		this->ram = memory;
 		
-		this->memoryPointer = 0;
+		this->memoryPointer = 40;
 		
 
 		MemoryInterface::interfaceCounter++;
@@ -46,40 +46,34 @@ namespace NB32
 	void MemoryInterface::refreshScreen()
 	{
 		vector<string> memSegment;
-	
 		int middleElement = this->memoryPointer;
 		int topElement;
-		
-		
 		
 		if (middleElement < (LINES-2)/2)
 			middleElement = (LINES-2)/2;
 		else
 			if (middleElement + (LINES-2)/2 > MEM_SIZE)
 				middleElement = MEM_SIZE - (LINES-2)/2 - 1;
-	
 		
 		topElement = middleElement - (LINES-2)/2;
 		
 		memSegment = this->ram->read(topElement, LINES-2);
 		
-		
 		for (int i=0; i+3<memSegment.size(); i+=4)
 		{
-			to_string(topElement+i);
+			//to_string(topElement+i);
 			
 			// build address
 			std::stringstream ss;
 			ss << std::hex << std::setfill('0') << std::setw(6) << topElement+i;
 			string index = ss.str();
 			
-			
 			// build dword as string
 			string d(" ");
-			d = d + memSegment[topElement+i] + " ";
-			d = d + memSegment[topElement+i+1] + " ";
-			d = d + memSegment[topElement+i+2] + " ";
-			d = d + memSegment[topElement+i+3];
+			d = d +	 memSegment[i] + " ";
+			d = d + memSegment[i+1] + " ";
+			d = d + memSegment[i+2] + " ";
+			d = d + memSegment[i+3];
 			
 			// build dword as number
 			string iChar(d);
@@ -120,6 +114,7 @@ namespace NB32
 			
 		}
 		
+
 		
 		wrefresh(this->window);
 		
