@@ -8,6 +8,8 @@
 #include "arithmetic/and.hpp"
 #include "arithmetic/or.hpp"
 #include "arithmetic/xor.hpp"
+#include "arithmetic/asl.hpp"
+#include "arithmetic/rot.hpp"
 #include "mnemonics.hpp"
 #include <string>
 namespace NB32

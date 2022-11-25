@@ -40,6 +40,10 @@ namespace NB32
 			return new Or(instructionString);
 		if (isOperation(instructionString, INST_ARITH_XOR_BITCODE))
 			return new Xor(instructionString);
+		if (isOperation(instructionString, INST_ARITH_ASL_BITCODE))
+			return new Asl(instructionString);
+		if (isOperation(instructionString, INST_ARITH_ROT_BITCODE))
+			return new Rot(instructionString);
 		
 		return nullptr;
 	}	

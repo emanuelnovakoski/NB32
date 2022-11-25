@@ -35,7 +35,7 @@ memoryInterface: memory interpreter
 specialInst: nop hlt
 	g++ -c $(INTERPRETER_DIR)/$(SPECIAL_DIR)/specialInst.cpp -o $(INTERPRETER_DIR)/$(SPECIAL_DIR)/specialInst.o
 
-arithInst: add sub mul div mod and or xor
+arithInst: add sub mul div mod and or xor asl rot
 	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/arithInst.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/arithInst.o
 	
 interpreter: specialInst arithInst 
@@ -70,6 +70,12 @@ or:
 	
 xor:
 	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/xor.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/xor.o
+	
+asl:
+	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/asl.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/asl.o
+	
+rot:
+	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/rot.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/rot.o
 
 clean:
 	rm $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE) O_INTERPRETER_SPECIAL_SOURCE=$(wildcard ./src/interpreter/special/*.o) nb32
