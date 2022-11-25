@@ -35,13 +35,10 @@ memoryInterface: memory interpreter
 specialInst: nop hlt
 	g++ -c $(INTERPRETER_DIR)/$(SPECIAL_DIR)/specialInst.cpp -o $(INTERPRETER_DIR)/$(SPECIAL_DIR)/specialInst.o
 
-arithInst: add sub
+arithInst: add sub mul div mod and or xor
 	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/arithInst.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/arithInst.o
-
-instruction: 
-	g++ -c $(INTERPRETER_DIR)/instruction.cpp -o $(INTERPRETER_DIR)/instruction.o
 	
-interpreter: specialInst arithInst instruction
+interpreter: specialInst arithInst 
 	g++ -c $(INTERPRETER_DIR)/interpreter.cpp -o $(INTERPRETER_DIR)/interpreter.o
 	
 nop:
@@ -55,6 +52,24 @@ add:
 	
 sub:
 	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/sub.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/sub.o
+
+mul:
+	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/mul.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/mul.o
+
+div:
+	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/div.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/div.o
+	
+mod:
+	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/mod.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/mod.o
+	
+and:
+	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/and.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/and.o
+
+or:
+	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/or.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/or.o
+	
+xor:
+	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/xor.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/xor.o
 
 clean:
 	rm $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE) O_INTERPRETER_SPECIAL_SOURCE=$(wildcard ./src/interpreter/special/*.o) nb32

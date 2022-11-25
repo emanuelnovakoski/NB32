@@ -28,6 +28,19 @@ namespace NB32
 			return new Add(instructionString);
 		if (isOperation(instructionString, INST_ARITH_SUB_BITCODE))
 			return new Sub(instructionString);
+		if (isOperation(instructionString, INST_ARITH_MUL_BITCODE))
+			return new Mul(instructionString);	
+		if (isOperation(instructionString, INST_ARITH_DIV_BITCODE))
+			return new Div(instructionString);
+		if (isOperation(instructionString, INST_ARITH_MOD_BITCODE))
+			return new Mod(instructionString);
+		if (isOperation(instructionString, INST_ARITH_AND_BITCODE))
+			return new And(instructionString);
+		if (isOperation(instructionString, INST_ARITH_OR_BITCODE))
+			return new Or(instructionString);
+		if (isOperation(instructionString, INST_ARITH_XOR_BITCODE))
+			return new Xor(instructionString);
+		
 		return nullptr;
 	}	
 	
