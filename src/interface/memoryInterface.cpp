@@ -20,7 +20,7 @@ namespace NB32
 		
 		this->ram = memory;
 		
-		this->memoryPointer = 24;
+		this->memoryPointer = 40;
 		
 
 		MemoryInterface::interfaceCounter++;
@@ -47,7 +47,9 @@ namespace NB32
 	{
 		vector<string> memSegment;
 		int middleElement = this->memoryPointer;
-		int topElement;
+		int topElement, amountOfElements;
+		
+		amountOfElements = (LINES-2)/4;
 		
 		if (middleElement < (LINES-2)/2)
 			middleElement = (LINES-2)/2;
@@ -55,7 +57,9 @@ namespace NB32
 			if (middleElement + (LINES-2)/2 > MEM_SIZE)
 				middleElement = MEM_SIZE - (LINES-2)/2 - 1;
 		
-		topElement = middleElement - (LINES-2)/2;
+		// finds the element that should be on top
+		topElement = middleElement - (int)((amountOfElements)/2) * 4;
+		
 		
 		memSegment = this->ram->read(topElement, LINES-2);
 		
@@ -110,20 +114,14 @@ namespace NB32
 			
 			// print decimal value of dwod
 			wmove(this->window, i+3, IMM_DEC_XPOS);
-			wprintw(this->window, "%012li ", iDecimal);
-			
+			wprintw(this->window, "%012li ", iDecimal);			
 		}
 		
-
-		
 		wrefresh(this->window);
-		
 	}
 	
 	void MemoryInterface::destroyScreen()
 	{
 		delwin(this->window);
 	}
-	
-	
 }
