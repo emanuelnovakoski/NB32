@@ -20,7 +20,7 @@ namespace NB32
 		
 		this->ram = memory;
 		
-		this->memoryPointer = 0;
+		this->memoryPointer = 24;
 		
 
 		MemoryInterface::interfaceCounter++;

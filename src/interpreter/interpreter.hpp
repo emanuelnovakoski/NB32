@@ -10,6 +10,7 @@
 #include "arithmetic/xor.hpp"
 #include "arithmetic/asl.hpp"
 #include "arithmetic/rot.hpp"
+#include "branch/br.hpp"
 #include "mnemonics.hpp"
 #include <string>
 namespace NB32

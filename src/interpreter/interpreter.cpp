@@ -48,6 +48,13 @@ namespace NB32
 		return nullptr;
 	}	
 	
+	Instruction* interpretBranch(string instructionString)
+	{
+		if (isOperation(instructionString, INST_BRANCH_BR_BITCODE))
+			return new Br(instructionString);
+		return nullptr;
+	}
+	
 	Instruction* Nb32Interpreter::interpret(std::string instructionString)
 	{
 		if (isGroup(instructionString, INST_GROUP_SPECIAL))
@@ -57,6 +64,10 @@ namespace NB32
 		if (isGroup(instructionString, INST_GROUP_ARITH))
 		{
 			return interpretArith(instructionString);
+		}
+		if (isGroup(instructionString, INST_GROUP_BRANCH))
+		{
+			return interpretBranch(instructionString);
 		}
 		return nullptr;
 	}
