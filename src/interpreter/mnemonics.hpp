@@ -3,6 +3,16 @@
 
 namespace NB32
 {
+	// addressing modes
+	const int OPERATION_MODE_REGISTER = 0;
+	const int OPERATION_MODE_POSTINCREMET = 1;
+	const int OPERATION_MODE_PREDECREMENT = 2;
+	const int OPERATION_MODE_INDEXED = 3;
+	const int OPERATION_MODE_REGISTER_INDIRECT = 4;
+	const int OPERATION_MODE_POSTINCREMET_INDIRECT = 5;
+	const int OPERATION_MODE_PREDECREMENT_INDIRECT = 6;
+	const int OPERATION_MODE_INDEXED_INDIRECT = 7;
+	
 	// instruction groups 
 	// GGGG xxxx xxxx xxxx
 	// xxxx xxxx xxxx xxxx

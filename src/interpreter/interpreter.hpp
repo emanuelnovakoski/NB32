@@ -15,6 +15,8 @@
 #include <string>
 namespace NB32
 {
+	
+	
 	class Nb32Interpreter
 	{
 		public:

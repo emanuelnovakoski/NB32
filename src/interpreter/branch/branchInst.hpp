@@ -2,6 +2,7 @@
 #define BRANCHINST
 
 #include "../instruction.hpp"
+
 namespace NB32
 {
 	class BranchInst : public Instruction
