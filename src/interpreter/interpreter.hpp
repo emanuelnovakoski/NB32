@@ -11,6 +11,16 @@
 #include "arithmetic/asl.hpp"
 #include "arithmetic/rot.hpp"
 #include "branch/br.hpp"
+#include "branch/bzs.hpp"
+#include "branch/bzc.hpp"
+#include "branch/bvc.hpp"
+#include "branch/bvs.hpp"
+#include "branch/bnc.hpp"
+#include "branch/bns.hpp"
+#include "branch/bcc.hpp"
+#include "branch/bcs.hpp"
+#include "branch/bbc.hpp"
+#include "branch/bbs.hpp"
 #include "mnemonics.hpp"
 #include <string>
 namespace NB32

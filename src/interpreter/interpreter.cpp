@@ -52,6 +52,26 @@ namespace NB32
 	{
 		if (isOperation(instructionString, INST_BRANCH_BR_BITCODE))
 			return new Br(instructionString);
+		if (isOperation(instructionString, INST_BRANCH_BZS_BITCODE))
+			return new Bzs(instructionString);
+		if (isOperation(instructionString, INST_BRANCH_BZC_BITCODE))
+			return new Bzc(instructionString);
+		if (isOperation(instructionString, INST_BRANCH_BVS_BITCODE))
+			return new Bvs(instructionString);
+		if (isOperation(instructionString, INST_BRANCH_BVC_BITCODE))
+			return new Bvc(instructionString);
+		if (isOperation(instructionString, INST_BRANCH_BNS_BITCODE))
+			return new Bns(instructionString);
+		if (isOperation(instructionString, INST_BRANCH_BNC_BITCODE))
+			return new Bnc(instructionString);
+		if (isOperation(instructionString, INST_BRANCH_BCS_BITCODE))
+			return new Bcs(instructionString);
+		if (isOperation(instructionString, INST_BRANCH_BCC_BITCODE))
+			return new Bcc(instructionString);
+		if (isOperation(instructionString, INST_BRANCH_BBS_BITCODE))
+			return new Bbs(instructionString);
+		if (isOperation(instructionString, INST_BRANCH_BBC_BITCODE))
+			return new Bbc(instructionString);
 		return nullptr;
 	}
 	

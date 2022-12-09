@@ -34,7 +34,7 @@ alu:
 memoryInterface: memory interpreter 
 	g++ -c $(INTERFACE_DIR)/memoryInterface.cpp -o $(SRC_DIR)/memoryInterface.o
 
-branchInst: br
+branchInst: br bzs bzc bvs bvc bns bnc bcc bcs bbs bbc
 	g++ -c $(INTERPRETER_DIR)/$(BRANCH_DIR)/branchInst.cpp -o $(INTERPRETER_DIR)/$(BRANCH_DIR)/branchInst.o
 
 specialInst: nop hlt
@@ -47,7 +47,37 @@ interpreter: specialInst arithInst branchInst
 	g++ -c $(INTERPRETER_DIR)/interpreter.cpp -o $(INTERPRETER_DIR)/interpreter.o
 	
 br:
-	g++ -c $(INTERPRETER_DIR)/$(BRANCH_DIR)/br.cpp -o $(INTERPRETER_DIR)/$(BRANCH_DIR)/br.o 
+	g++ -c $(INTERPRETER_DIR)/$(BRANCH_DIR)/br.cpp -o $(INTERPRETER_DIR)/$(BRANCH_DIR)/br.o
+	
+bzs:
+	g++ -c $(INTERPRETER_DIR)/$(BRANCH_DIR)/bzs.cpp -o $(INTERPRETER_DIR)/$(BRANCH_DIR)/bzs.o
+
+bzc:
+	g++ -c $(INTERPRETER_DIR)/$(BRANCH_DIR)/bzc.cpp -o $(INTERPRETER_DIR)/$(BRANCH_DIR)/bzc.o
+	
+bvs:
+	g++ -c $(INTERPRETER_DIR)/$(BRANCH_DIR)/bvs.cpp -o $(INTERPRETER_DIR)/$(BRANCH_DIR)/bvs.o
+
+bvc:
+	g++ -c $(INTERPRETER_DIR)/$(BRANCH_DIR)/bvc.cpp -o $(INTERPRETER_DIR)/$(BRANCH_DIR)/bvc.o
+	
+bns:
+	g++ -c $(INTERPRETER_DIR)/$(BRANCH_DIR)/bns.cpp -o $(INTERPRETER_DIR)/$(BRANCH_DIR)/bns.o
+
+bnc:
+	g++ -c $(INTERPRETER_DIR)/$(BRANCH_DIR)/bnc.cpp -o $(INTERPRETER_DIR)/$(BRANCH_DIR)/bnc.o
+
+bcs:
+	g++ -c $(INTERPRETER_DIR)/$(BRANCH_DIR)/bcs.cpp -o $(INTERPRETER_DIR)/$(BRANCH_DIR)/bcs.o
+
+bcc:
+	g++ -c $(INTERPRETER_DIR)/$(BRANCH_DIR)/bcc.cpp -o $(INTERPRETER_DIR)/$(BRANCH_DIR)/bcc.o
+	
+bbs:
+	g++ -c $(INTERPRETER_DIR)/$(BRANCH_DIR)/bbs.cpp -o $(INTERPRETER_DIR)/$(BRANCH_DIR)/bbs.o
+
+bbc:
+	g++ -c $(INTERPRETER_DIR)/$(BRANCH_DIR)/bbc.cpp -o $(INTERPRETER_DIR)/$(BRANCH_DIR)/bbc.o
 	
 nop:
 	g++ -c $(INTERPRETER_DIR)/$(SPECIAL_DIR)/nop.cpp -o $(INTERPRETER_DIR)/$(SPECIAL_DIR)/nop.o
