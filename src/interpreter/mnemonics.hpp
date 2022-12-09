@@ -19,7 +19,7 @@ namespace NB32
 	const std::string INST_GROUP_SPECIAL = std::string("0000");
 	const std::string INST_GROUP_ARITH = std::string("0001");
 	const std::string INST_GROUP_BRANCH = std::string("0010");
-	const std::string INST_GROUP_MEMORY = std::string("0011");
+	const std::string INST_GROUP_MOVE = std::string("0011");
 	const std::string INST_GROUP_SUBROUTINE = std::string("0100");
 	const std::string INST_GROUP_1MATH = std::string("0101");
 	const std::string INST_GROUP_STACK = std::string("0110");
@@ -107,11 +107,11 @@ namespace NB32
 	const std::string INST_BRANCH_BVC_MNEMONIC = std::string("BVC");
 	
 
-	// MEMORY group
+	// MOVE group
 	// 0011 OOOO OOOO xxxx
 	// xxxx xxxx xxxx xxxx
-	const std::string INST_MEMORY_MOV_BITCODE = std::string("00000000");
-	const std::string INST_MEMORY_MOV_MNEMONIC = std::string("MOV");
+	const std::string INST_MOVE_MOVE_BITCODE = std::string("00000000");
+	const std::string INST_MOVE_MOVE_MNEMONIC = std::string("MOVE");
 	
 
 	// SUBROUTINE group

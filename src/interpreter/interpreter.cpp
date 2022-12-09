@@ -75,6 +75,13 @@ namespace NB32
 		return nullptr;
 	}
 	
+	Instruction* interpretMove(std::string instructionString)
+	{	
+		if (isOperation(instructionString, INST_MOVE_MOVE_BITCODE))
+			return new Move(instructionString);
+		return nullptr;	
+	}
+	
 	Instruction* Nb32Interpreter::interpret(std::string instructionString)
 	{
 		if (isGroup(instructionString, INST_GROUP_SPECIAL))
@@ -88,6 +95,10 @@ namespace NB32
 		if (isGroup(instructionString, INST_GROUP_BRANCH))
 		{
 			return interpretBranch(instructionString);
+		}
+		if (isGroup(instructionString, INST_GROUP_MOVE))
+		{
+			return interpretMove(instructionString);
 		}
 		return nullptr;
 	}

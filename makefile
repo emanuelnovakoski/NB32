@@ -4,6 +4,7 @@ O_INTERPRETER_SOURCE=$(wildcard ./src/interpreter/*.o)
 O_INTERPRETER_SPECIAL_SOURCE=$(wildcard ./src/interpreter/special/*.o)
 O_INTERPRETER_ARITH_SOURCE=$(wildcard ./src/interpreter/arithmetic/*.o)
 O_INTERPRETER_BRANCH_SOURCE=$(wildcard ./src/interpreter/branch/*.o)
+O_INTERPRETER_MOVE_SOURCE=$(wildcard ./src/interpreter/move/*.o)
 
 SRC_DIR=src/processor
 INTERFACE_DIR=src/interface
@@ -11,10 +12,11 @@ INTERPRETER_DIR=src/interpreter
 SPECIAL_DIR=special
 ARITHMETIC_DIR=arithmetic
 BRANCH_DIR=branch
+MOVE_DIR=move
 
 NB32: memory alu register registerBank memoryInterface 
-	g++ $(SRC_DIR)/nb32.cpp $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE)  $(O_INTERPRETER_SPECIAL_SOURCE) $(O_INTERPRETER_ARITH_SOURCE) $(O_INTERPRETER_BRANCH_SOURCE) -o nb32 -lncurses
-	rm $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE) $(O_INTERPRETER_SPECIAL_SOURCE) $(O_INTERPRETER_ARITH_SOURCE) $(O_INTERPRETER_BRANCH_SOURCE)
+	g++ $(SRC_DIR)/nb32.cpp $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE)  $(O_INTERPRETER_SPECIAL_SOURCE) $(O_INTERPRETER_ARITH_SOURCE) $(O_INTERPRETER_BRANCH_SOURCE) $(O_INTERPRETER_MOVE_SOURCE) -o nb32 -lncurses
+	rm $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE) $(O_INTERPRETER_SPECIAL_SOURCE) $(O_INTERPRETER_ARITH_SOURCE) $(O_INTERPRETER_BRANCH_SOURCE) $(O_INTERPRETER_MOVE_SOURCE)
 	
 register:
 	g++ -c $(SRC_DIR)/register.cpp -o $(SRC_DIR)/register.o
@@ -34,6 +36,9 @@ alu:
 memoryInterface: memory interpreter 
 	g++ -c $(INTERFACE_DIR)/memoryInterface.cpp -o $(SRC_DIR)/memoryInterface.o
 
+moveInst: move
+	g++ -c $(INTERPRETER_DIR)/$(MOVE_DIR)/moveInst.cpp -o $(INTERPRETER_DIR)/$(MOVE_DIR)/moveInst.o
+
 branchInst: br bzs bzc bvs bvc bns bnc bcc bcs bbs bbc
 	g++ -c $(INTERPRETER_DIR)/$(BRANCH_DIR)/branchInst.cpp -o $(INTERPRETER_DIR)/$(BRANCH_DIR)/branchInst.o
 
@@ -43,8 +48,11 @@ specialInst: nop hlt
 arithInst: add sub mul div mod and or xor asl rot
 	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/arithInst.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/arithInst.o
 	
-interpreter: specialInst arithInst branchInst
+interpreter: specialInst arithInst branchInst moveInst
 	g++ -c $(INTERPRETER_DIR)/interpreter.cpp -o $(INTERPRETER_DIR)/interpreter.o
+
+move:
+	g++ -c $(INTERPRETER_DIR)/$(MOVE_DIR)/move.cpp -o $(INTERPRETER_DIR)/$(MOVE_DIR)/move.o
 	
 br:
 	g++ -c $(INTERPRETER_DIR)/$(BRANCH_DIR)/br.cpp -o $(INTERPRETER_DIR)/$(BRANCH_DIR)/br.o
@@ -116,4 +124,4 @@ rot:
 	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/rot.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/rot.o
 
 clean:
-	rm $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE) $(O_INTERPRETER_SPECIAL_SOURCE) $(O_INTERPRETER_BRANCH_SOURCE) nb32
+	rm $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE) $(O_INTERPRETER_SPECIAL_SOURCE) $(O_INTERPRETER_BRANCH_SOURCE) $(O_INTERPRETER_MOVE_SOURCE) nb32
