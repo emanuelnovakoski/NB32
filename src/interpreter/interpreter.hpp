@@ -22,6 +22,8 @@
 #include "branch/bbc.hpp"
 #include "branch/bbs.hpp"
 #include "move/move.hpp"
+#include "subroutine/call.hpp"
+#include "subroutine/ret.hpp"
 #include "mnemonics.hpp"
 #include <string>
 namespace NB32

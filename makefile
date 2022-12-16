@@ -5,6 +5,7 @@ O_INTERPRETER_SPECIAL_SOURCE=$(wildcard ./src/interpreter/special/*.o)
 O_INTERPRETER_ARITH_SOURCE=$(wildcard ./src/interpreter/arithmetic/*.o)
 O_INTERPRETER_BRANCH_SOURCE=$(wildcard ./src/interpreter/branch/*.o)
 O_INTERPRETER_MOVE_SOURCE=$(wildcard ./src/interpreter/move/*.o)
+O_INTERPRETER_SUBROUTINE_SOURCE=$(wildcard ./src/interpreter/subroutine/*.o)
 
 SRC_DIR=src/processor
 INTERFACE_DIR=src/interface
@@ -13,10 +14,11 @@ SPECIAL_DIR=special
 ARITHMETIC_DIR=arithmetic
 BRANCH_DIR=branch
 MOVE_DIR=move
+SUBROUTINE_DIR=subroutine
 
 NB32: memory alu register registerBank memoryInterface 
-	g++ $(SRC_DIR)/nb32.cpp $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE)  $(O_INTERPRETER_SPECIAL_SOURCE) $(O_INTERPRETER_ARITH_SOURCE) $(O_INTERPRETER_BRANCH_SOURCE) $(O_INTERPRETER_MOVE_SOURCE) -o nb32 -lncurses
-	rm $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE) $(O_INTERPRETER_SPECIAL_SOURCE) $(O_INTERPRETER_ARITH_SOURCE) $(O_INTERPRETER_BRANCH_SOURCE) $(O_INTERPRETER_MOVE_SOURCE)
+	g++ $(SRC_DIR)/nb32.cpp $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE)  $(O_INTERPRETER_SPECIAL_SOURCE) $(O_INTERPRETER_ARITH_SOURCE) $(O_INTERPRETER_BRANCH_SOURCE) $(O_INTERPRETER_MOVE_SOURCE) $(O_INTERPRETER_SUBROUTINE_SOURCE) -o nb32 -lncurses
+	rm $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE) $(O_INTERPRETER_SPECIAL_SOURCE) $(O_INTERPRETER_ARITH_SOURCE) $(O_INTERPRETER_BRANCH_SOURCE) $(O_INTERPRETER_MOVE_SOURCE) $(O_INTERPRETER_SUBROUTINE_SOURCE)
 	
 register:
 	g++ -c $(SRC_DIR)/register.cpp -o $(SRC_DIR)/register.o
@@ -48,7 +50,10 @@ specialInst: nop hlt
 arithInst: add sub mul div mod and or xor asl rot
 	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/arithInst.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/arithInst.o
 	
-interpreter: specialInst arithInst branchInst moveInst
+subroutineInst: call ret
+	g++ -c $(INTERPRETER_DIR)/$(SUBROUTINE_DIR)/subroutineInst.cpp -o $(INTERPRETER_DIR)/$(SUBROUTINE_DIR)/subroutineInst.o
+	
+interpreter: specialInst arithInst branchInst moveInst subroutineInst
 	g++ -c $(INTERPRETER_DIR)/interpreter.cpp -o $(INTERPRETER_DIR)/interpreter.o
 
 move:
@@ -123,5 +128,11 @@ asl:
 rot:
 	g++ -c $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/rot.cpp -o $(INTERPRETER_DIR)/$(ARITHMETIC_DIR)/rot.o
 
+call: 
+	g++ -c $(INTERPRETER_DIR)/$(SUBROUTINE_DIR)/call.cpp -o $(INTERPRETER_DIR)/$(SUBROUTINE_DIR)/call.o
+	
+ret: 
+	g++ -c $(INTERPRETER_DIR)/$(SUBROUTINE_DIR)/ret.cpp -o $(INTERPRETER_DIR)/$(SUBROUTINE_DIR)/ret.o
+	
 clean:
-	rm $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE) $(O_INTERPRETER_SPECIAL_SOURCE) $(O_INTERPRETER_BRANCH_SOURCE) $(O_INTERPRETER_MOVE_SOURCE) nb32
+	rm $(O_SOURCE) $(O_INTERFACE_SOURCE) $(O_INTERPRETER_SOURCE) $(O_INTERPRETER_SPECIAL_SOURCE) $(O_INTERPRETER_BRANCH_SOURCE) $(O_INTERPRETER_MOVE_SOURCE) $(O_INTERPRETER_SUBROUTINE_SOURCE) nb32

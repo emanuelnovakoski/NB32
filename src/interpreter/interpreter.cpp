@@ -82,6 +82,15 @@ namespace NB32
 		return nullptr;	
 	}
 	
+	Instruction* interpretSubroutine(std::string instructionString)
+	{	
+		if (isOperation(instructionString, INST_SUBROUTINE_CALL_BITCODE))
+			return new Call(instructionString);
+		if (isOperation(instructionString, INST_SUBROUTINE_RET_BITCODE))
+			return new Ret(instructionString);
+		return nullptr;	
+	}
+	
 	Instruction* Nb32Interpreter::interpret(std::string instructionString)
 	{
 		if (isGroup(instructionString, INST_GROUP_SPECIAL))
@@ -99,6 +108,10 @@ namespace NB32
 		if (isGroup(instructionString, INST_GROUP_MOVE))
 		{
 			return interpretMove(instructionString);
+		}
+		if (isGroup(instructionString, INST_GROUP_SUBROUTINE))
+		{
+			return interpretSubroutine(instructionString);
 		}
 		return nullptr;
 	}
