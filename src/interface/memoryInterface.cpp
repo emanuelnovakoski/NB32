@@ -20,7 +20,7 @@ namespace NB32
 		
 		this->ram = memory;
 		
-		this->memoryPointer = 76;
+		this->memoryPointer = 0;
 		
 
 		MemoryInterface::interfaceCounter++;
@@ -46,22 +46,16 @@ namespace NB32
 	void MemoryInterface::refreshScreen()
 	{
 		vector<string> memSegment;
-		int middleElement = this->memoryPointer;
 		int topElement, amountOfElements;
 		
 		amountOfElements = (LINES-2)/4;
 		
-		if (middleElement < (LINES-2)/2)
-			middleElement = (LINES-2)/2;
-		else
-			if (middleElement + (LINES-2)/2 > MEM_SIZE)
-				middleElement = MEM_SIZE - (LINES-2)/2 - 1;
+		topElement = this->memoryPointer;
 		
-		// finds the element that should be on top
-		topElement = middleElement - (int)((amountOfElements)/2) * 4;
+		if ((topElement + amountOfElements*4) > MEM_SIZE)
+			topElement = MEM_SIZE - amountOfElements*4;
 		
-		
-		memSegment = this->ram->read(topElement, LINES-2);
+		memSegment = this->ram->read(topElement, LINES-2 - (LINES-2)%4);
 		
 		for (int i=0; i+3<memSegment.size(); i+=4)
 		{

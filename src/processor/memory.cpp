@@ -10,6 +10,7 @@ namespace NB32
 		{
 			memoryBlock.push_back("00000000");
 		}
+		
 	}
 
 	vector<string> Memory::read(int index, int length)
@@ -55,6 +56,8 @@ namespace NB32
 		
 	}
 
+
+	// TODO possible memory leak here
 	void Memory::loadMemoryFromFile(char* filename)
 	{
 		vector<string> newMem;
@@ -78,7 +81,6 @@ namespace NB32
 			newMem.push_back("00000000");
 		}
 		this->memoryBlock = newMem;
-	
 		
 	
 	/*

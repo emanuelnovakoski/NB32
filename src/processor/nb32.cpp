@@ -11,7 +11,7 @@ void formatStringToMemoryVisual(char* str[], int length, int startIndex);
 int main(int argc, char** argv)
 {	
 	
-
+	int memoryStart = 0;
 	Memory* ram = new Memory();
 	RegisterBank* regBank = new RegisterBank();
 	Memory* memory = new Memory();
@@ -43,9 +43,22 @@ int main(int argc, char** argv)
 			{
 				cout << USAGE_STRING;
 				return -1;
-				
 			}
 			
+		}
+		if (strcmp(argv[i], "-pc") == 0)
+		{
+			i++;
+			cout << "i, argc " << i << " " << argc;
+			if (i < argc)
+			{
+				memoryStart = atoi(argv[i]);
+			}
+			else
+			{
+				cout << USAGE_STRING;
+				return -1;
+			}
 		}
 		i++;
 	}
@@ -66,7 +79,7 @@ int main(int argc, char** argv)
 		delete memInterface;
 	}
 	
-
+	memInterface->updatePointer(memoryStart);
 	
 	getch();
 	
