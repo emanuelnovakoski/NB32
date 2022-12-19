@@ -92,6 +92,9 @@ namespace NB32
 			// print binary value of dword
 			wprintw(this->window, "%s", d.c_str());
 			
+			// clears line
+			mvwprintw(this->window, i+2, 1, "\t\t\t\t\t");
+			
 			mvwprintw(this->window, i+2, 1, "Instruction: ");
 			
 			// print instruction representation
