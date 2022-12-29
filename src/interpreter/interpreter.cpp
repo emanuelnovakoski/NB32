@@ -91,6 +91,13 @@ namespace NB32
 		return nullptr;	
 	}
 	
+	Instruction* interpret1Math(std::string instructionString)
+	{	
+		if (isOperation(instructionString, INST_1MATH_INC_BITCODE))
+			return new Inc(instructionString);
+		return nullptr;	
+	}
+	
 	Instruction* Nb32Interpreter::interpret(std::string instructionString)
 	{
 		if (isGroup(instructionString, INST_GROUP_SPECIAL))
@@ -113,6 +120,11 @@ namespace NB32
 		{
 			return interpretSubroutine(instructionString);
 		}
+		if (isGroup(instructionString, INST_GROUP_1MATH))
+		{
+			return interpret1Math(instructionString);
+		}
+		
 		return nullptr;
 	}
 }

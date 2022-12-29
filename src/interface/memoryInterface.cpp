@@ -15,13 +15,9 @@ namespace NB32
 		this->window = newwin(LINES, WINDOW_WIDTH, 0, xpos);
 		
 		box(this->window, 0 , 0);	
-		
-		
-		
+				
 		this->ram = memory;
-		
 		this->memoryPointer = 0;
-		
 
 		MemoryInterface::interfaceCounter++;
 		
@@ -95,9 +91,9 @@ namespace NB32
 			// clears line
 			mvwprintw(this->window, i+2, 1, "\t\t\t\t\t");
 			
+			// print instruction representation
 			mvwprintw(this->window, i+2, 1, "Instruction: ");
 			
-			// print instruction representation
 			Instruction* instruction = Nb32Interpreter::interpret(iChar);
 			if (instruction == nullptr)
 				wprintw(this->window, "    NOT AN INSTRUCTION ");

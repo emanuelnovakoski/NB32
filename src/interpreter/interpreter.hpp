@@ -24,6 +24,7 @@
 #include "move/move.hpp"
 #include "subroutine/call.hpp"
 #include "subroutine/ret.hpp"
+#include "1math/inc.hpp"
 #include "mnemonics.hpp"
 #include <string>
 namespace NB32
