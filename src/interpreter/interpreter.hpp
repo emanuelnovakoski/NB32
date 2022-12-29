@@ -25,6 +25,8 @@
 #include "subroutine/call.hpp"
 #include "subroutine/ret.hpp"
 #include "1math/inc.hpp"
+#include "1math/dec.hpp"
+#include "1math/neg.hpp"
 #include "mnemonics.hpp"
 #include <string>
 namespace NB32

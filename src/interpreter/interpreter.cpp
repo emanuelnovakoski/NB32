@@ -95,6 +95,10 @@ namespace NB32
 	{	
 		if (isOperation(instructionString, INST_1MATH_INC_BITCODE))
 			return new Inc(instructionString);
+		if (isOperation(instructionString, INST_1MATH_DEC_BITCODE))
+			return new Dec(instructionString);
+		if (isOperation(instructionString, INST_1MATH_NEG_BITCODE))
+			return new Neg(instructionString);
 		return nullptr;	
 	}
 	

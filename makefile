@@ -57,7 +57,7 @@ arithInst: add sub mul div mod and or xor asl rot
 subroutineInst: call ret
 	g++ -c $(INTERPRETER_DIR)/$(SUBROUTINE_DIR)/subroutineInst.cpp -o $(INTERPRETER_DIR)/$(SUBROUTINE_DIR)/subroutineInst.o
 	
-1MathInst: inc
+1MathInst: inc dec neg
 	g++ -c $(INTERPRETER_DIR)/$(1MATH_DIR)/1MathInst.cpp -o $(INTERPRETER_DIR)/$(1MATH_DIR)/1MathInst.o
 	
 interpreter: specialInst arithInst branchInst moveInst subroutineInst 1MathInst
@@ -65,6 +65,12 @@ interpreter: specialInst arithInst branchInst moveInst subroutineInst 1MathInst
 
 inc:
 	g++ -c $(INTERPRETER_DIR)/$(1MATH_DIR)/inc.cpp -o $(INTERPRETER_DIR)/$(1MATH_DIR)/inc.o
+	
+dec:
+	g++ -c $(INTERPRETER_DIR)/$(1MATH_DIR)/dec.cpp -o $(INTERPRETER_DIR)/$(1MATH_DIR)/dec.o
+	
+neg:
+	g++ -c $(INTERPRETER_DIR)/$(1MATH_DIR)/neg.cpp -o $(INTERPRETER_DIR)/$(1MATH_DIR)/neg.o
 
 move:
 	g++ -c $(INTERPRETER_DIR)/$(MOVE_DIR)/move.cpp -o $(INTERPRETER_DIR)/$(MOVE_DIR)/move.o
